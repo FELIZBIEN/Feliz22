@@ -1,8 +1,9 @@
 // ─── IR A ESCENA 3 ───────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('btn-scene3')?.addEventListener('click', goToScene3);
-});
+const btnScene3 = document.getElementById('btn-scene3');
 
+if (btnScene3) {
+  btnScene3.addEventListener('click', goToScene3);
+}
 function goToScene3() {
   const s2 = document.getElementById('scene2');
   const s3 = document.getElementById('scene3');
