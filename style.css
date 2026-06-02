@@ -1,0 +1,258 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ── SCENE 1 ── */
+#scene1 {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 1.8s ease;
+}
+
+#scene1.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#c {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── SCENE 2 ── */
+#scene2 {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background: #020b18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1.8s ease;
+}
+
+#scene2.visible {
+  opacity: 1;
+}
+
+#stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#cake {
+  position: relative;
+  z-index: 2;
+  width: min(70vw, 400px);
+  max-height: 80vh;
+  object-fit: contain;
+  animation: floatCake 3.5s ease-in-out infinite, fadeInCake 1.5s ease forwards;
+  filter: drop-shadow(0 0 30px rgba(255, 180, 0, 0.4));
+}
+
+@keyframes floatCake {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-14px); }
+}
+
+@keyframes fadeInCake {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0px);  }
+}
+
+/* ── AVION + BANDERA ── */
+#plane-wrap {
+  position: absolute;
+  top: 12%;
+  left: -420px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  animation: flyAcross 18s linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes flyAcross {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 520px)); }
+}
+
+#plane-svg {
+  width: 80px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+
+/* Hilo de la bandera */
+#rope {
+  width: 60px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg, #ccc 0px, #ccc 4px, transparent 4px, transparent 8px
+  );
+  flex-shrink: 0;
+}
+
+/* Bandera */
+#banner {
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  padding: 10px 22px;
+  font-family: 'Georgia', serif;
+  font-size: clamp(14px, 3.2vw, 22px);
+  color: #c0006a;
+  white-space: nowrap;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  box-shadow: 2px 3px 14px rgba(0,0,0,0.4);
+  animation: waveBanner 1.2s ease-in-out infinite alternate;
+  transform-origin: left center;
+}
+
+@keyframes waveBanner {
+  0%   { transform: rotate(-1.5deg) translateY(-2px); }
+  100% { transform: rotate(1.5deg)  translateY(2px);  }
+}
+
+/* ── BOTÓN IR A ESCENA 3 ── */
+#btn-scene3 {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: linear-gradient(135deg, #c0006a, #ff3399);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 13px 28px;
+  font-size: clamp(0.85rem, 3vw, 1.1rem);
+  font-family: 'Georgia', serif;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(192,0,106,0.5);
+  animation: pulseBtnS3 2s ease-in-out infinite;
+  letter-spacing: 0.04em;
+}
+@keyframes pulseBtnS3 {
+  0%,100% { box-shadow: 0 4px 20px rgba(192,0,106,0.5); transform: translateX(-50%) scale(1); }
+  50%      { box-shadow: 0 6px 32px rgba(255,51,153,0.7); transform: translateX(-50%) scale(1.04); }
+}
+
+/* ── PANTALLA DE ENTRADA ── */
+#entry-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+#entry-screen.hiding {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
+/* Partículas de fondo del entry */
+#entry-particles {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(180,0,100,0.18) 0%, transparent 70%);
+  animation: entryGlow 3s ease-in-out infinite alternate;
+}
+@keyframes entryGlow {
+  0%   { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Botón central */
+#entry-btn {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 12px);
+  width: clamp(180px, 55vw, 280px);
+  height: clamp(180px, 55vw, 280px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%,
+    rgba(255,80,160,0.25),
+    rgba(140,0,80,0.35) 60%,
+    rgba(60,0,40,0.5)
+  );
+  border: 2px solid rgba(255,100,180,0.5);
+  box-shadow:
+    0 0 40px rgba(255,30,130,0.4),
+    0 0 80px rgba(255,0,100,0.2),
+    inset 0 0 30px rgba(255,80,160,0.1);
+  cursor: pointer;
+  outline: none;
+  animation: entryPulse 2.2s ease-in-out infinite;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+#entry-btn:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 60px rgba(255,30,130,0.6),
+    0 0 120px rgba(255,0,100,0.3),
+    inset 0 0 40px rgba(255,80,160,0.15);
+}
+#entry-btn:active {
+  transform: scale(0.96);
+}
+
+@keyframes entryPulse {
+  0%,100% {
+    box-shadow: 0 0 40px rgba(255,30,130,0.4), 0 0 80px rgba(255,0,100,0.2), inset 0 0 30px rgba(255,80,160,0.1);
+  }
+  50% {
+    box-shadow: 0 0 65px rgba(255,30,130,0.65), 0 0 130px rgba(255,0,100,0.35), inset 0 0 50px rgba(255,80,160,0.18);
+  }
+}
+
+.entry-top {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  color: #fff;
+  text-shadow:
+    0 0 15px rgba(255,100,180,0.9),
+    0 0 40px rgba(255,0,120,0.5);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.entry-heart {
+  font-size: clamp(2rem, 7vw, 3rem);
+  line-height: 1;
+  animation: heartBeat 1.4s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(255,30,100,0.9));
+}
+@keyframes heartBeat {
+  0%,100% { transform: scale(1);    }
+  15%      { transform: scale(1.22); }
+  30%      { transform: scale(1);    }
+  45%      { transform: scale(1.12); }
+  60%      { transform: scale(1);    }
+}

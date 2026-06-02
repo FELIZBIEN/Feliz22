@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Feliz Cumpleaños Jairis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scene3.css">
+  <link rel="stylesheet" href="scene4.css">
+</head>
+<body>
+
+  <!-- AUDIO DE FONDO -->
+  <audio id="bg-music" src="audio/song.mp3" loop preload="auto"></audio>
+
+  <!-- PANTALLA DE ENTRADA -->
+  <div id="entry-screen">
+    <div id="entry-particles"></div>
+    <button id="entry-btn">
+      <span class="entry-top">Para Ti</span>
+      <span class="entry-heart">❤</span>
+    </button>
+  </div>
+
+  <!-- ESCENA 1: Matrix -->
+  <div id="scene1">
+    <canvas id="c"></canvas>
+  </div>
+
+  <!-- ESCENA 2: Cielo + imagen + avión -->
+  <div id="scene2">
+    <canvas id="stars"></canvas>
+    <div id="plane-wrap">
+      <svg id="plane-svg" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="60" cy="30" rx="52" ry="13" fill="#e8e8e8"/>
+        <ellipse cx="108" cy="30" rx="10" ry="9" fill="#d0d0d0"/>
+        <polygon points="8,30 0,15 22,28" fill="#bbb"/>
+        <polygon points="55,22 80,22 70,5 45,18" fill="#d5d5d5"/>
+        <polygon points="20,28 35,28 30,18 18,22" fill="#ccc"/>
+        <circle cx="85" cy="26" r="4" fill="#aadeff" opacity="0.8"/>
+        <circle cx="73" cy="25" r="4" fill="#aadeff" opacity="0.8"/>
+        <circle cx="61" cy="25" r="4" fill="#aadeff" opacity="0.8"/>
+        <ellipse cx="68" cy="33" rx="9" ry="5" fill="#999"/>
+        <ellipse cx="68" cy="33" rx="6" ry="3.5" fill="#777"/>
+        <ellipse cx="59" cy="33" rx="5" ry="2.5" fill="#ff8800" opacity="0.7"/>
+      </svg>
+      <div id="rope"></div>
+      <div id="banner">✨ Nunca olvides que eres increíble ✨</div>
+    </div>
+    <img id="cake" src="img/cake.png" alt="Happy Birthday">
+    <button id="btn-scene3">💌 Ver tu regalo especial</button>
+  </div>
+
+  <!-- ESCENA 3: Libro -->
+  <div id="scene3"></div>
+
+  <!-- ESCENA 4: Corazón de fotos + Fuegos artificiales -->
+  <div id="scene4">
+    <canvas id="fw-canvas"></canvas>
+    <div id="heart-container"></div>
+    <div id="fw-message">
+      <div class="fw-title">🎉 Felices 22 🎉</div>
+      <div class="fw-sub">¡Que este año sea el más increíble de tu vida,<br>Jairis! 💖</div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('entry-btn').addEventListener('click', function() {
+      // 1. Iniciar música
+      const audio = document.getElementById('bg-music');
+      audio.volume = 0.35;
+      audio.play().catch(() => {});
+
+      // 2. Animar salida del entry screen
+      const entry = document.getElementById('entry-screen');
+      entry.classList.add('hiding');
+
+      setTimeout(() => {
+        entry.style.display = 'none';
+      }, 1000);
+    });
+  </script>
+
+  <script src="app.js"></script>
+  <script src="scene3.js"></script>
+  <script src="scene4.js"></script>
+</body>
+</html>

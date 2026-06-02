@@ -1,0 +1,63 @@
+/* ══════════════════════════════════════════════
+   SCENE 4 — FUEGOS + CORAZÓN DE FOTOS
+══════════════════════════════════════════════ */
+#scene4 {
+  position: fixed; inset: 0; z-index: 4;
+  background: #020b18;
+  display: none;
+  align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+  overflow: hidden;
+}
+
+#fw-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+
+/* ── LLUVIA DE FOTOS ──
+   Las tarjetas se crean dinámicamente desde JS con inline styles + animation fallDown
+   Solo necesitamos el keyframe aquí como fallback
+*/
+@keyframes fallDown {
+  0%   { opacity: 0; transform: translateY(0) scale(0.7); }
+  8%   { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(110vh) scale(0.95); }
+}
+
+/* ── TEXTO FINAL ── */
+#fw-message {
+  position: absolute; z-index: 3;
+  bottom: 6%;
+  left: 0; right: 0;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+  text-align: center; padding: 0 20px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  pointer-events: none;
+}
+#fw-message.visible { opacity: 1; transform: translateY(0); }
+
+#fw-message .fw-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2rem, 8vw, 3.8rem);
+  color: #fff;
+  text-shadow:
+    0 0 20px rgba(255,200,0,0.9),
+    0 0 50px rgba(255,100,0,0.6),
+    0 0 100px rgba(255,50,150,0.4);
+  animation: shimmer 2s ease-in-out infinite alternate;
+}
+#fw-message .fw-sub {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1rem, 3.8vw, 1.7rem);
+  color: rgba(255,220,180,0.95);
+  text-shadow: 0 0 15px rgba(255,150,50,0.7);
+}
+@keyframes shimmer {
+  0%  { text-shadow: 0 0 20px rgba(255,200,0,0.9), 0 0 50px rgba(255,100,0,0.6); }
+  100%{ text-shadow: 0 0 40px rgba(255,220,100,1), 0 0 80px rgba(255,50,150,0.8), 0 0 120px rgba(100,150,255,0.5); }
+}
